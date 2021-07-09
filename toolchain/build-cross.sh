@@ -15,7 +15,7 @@ curl -O https://ftp.gnu.org/gnu/gmp/gmp-$GMP_VERSION.tar.bz2
 curl -O https://ftp.gnu.org/gnu/mpc/mpc-$MPC_VERSION.tar.gz
 curl -O https://ftp.gnu.org/gnu/mpfr/mpfr-$MPFR_VERSION.tar.gz
 curl -O https://ftp.gnu.org/gnu/libiconv/libiconv-$LIBICONV_VERSION.tar.gz
-
+£
 tar xf binutils-$BINUTILS_VERSION.tar.gz
 tar xf gcc-$GCC_VERSION.tar.gz
 tar xf gmp-$GMP_VERSION.tar.bz2
@@ -64,3 +64,10 @@ make install-gcc install-target-libgcc
 popd
 
 echo "🎉"
+
+echo -n "Cleanup? [Y/n] "
+read answer
+
+if [ -z $answer ] || [ "$answer" == "y"] || [ "$answer" == "Y" ]; then
+    rm -fr build-gcc build-binutils gcc-$GCC_VERSION binutils-$BINUTILS_VERSION
+fi
