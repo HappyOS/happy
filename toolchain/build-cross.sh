@@ -9,12 +9,12 @@ MPC_VERSION=1.2.1
 MPFR_VERSION=4.1.0
 LIBICONV_VERSION=1.16
 
-# curl -O https://ftp.gnu.org/gnu/binutils/binutils-$BINUTILS_VERSION.tar.gz
-# curl -O https://ftp.gnu.org/gnu/gcc/gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.gz
-# curl -O https://ftp.gnu.org/gnu/gmp/gmp-$GMP_VERSION.tar.bz2
-# curl -O https://ftp.gnu.org/gnu/mpc/mpc-$MPC_VERSION.tar.gz
-# curl -O https://ftp.gnu.org/gnu/mpfr/mpfr-$MPFR_VERSION.tar.gz
-# curl -O https://ftp.gnu.org/gnu/libiconv/libiconv-$LIBICONV_VERSION.tar.gz
+curl -O https://ftp.gnu.org/gnu/binutils/binutils-$BINUTILS_VERSION.tar.gz
+curl -O https://ftp.gnu.org/gnu/gcc/gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.gz
+curl -O https://ftp.gnu.org/gnu/gmp/gmp-$GMP_VERSION.tar.bz2
+curl -O https://ftp.gnu.org/gnu/mpc/mpc-$MPC_VERSION.tar.gz
+curl -O https://ftp.gnu.org/gnu/mpfr/mpfr-$MPFR_VERSION.tar.gz
+curl -O https://ftp.gnu.org/gnu/libiconv/libiconv-$LIBICONV_VERSION.tar.gz
 
 tar xf binutils-$BINUTILS_VERSION.tar.gz
 tar xf gcc-$GCC_VERSION.tar.gz
@@ -25,11 +25,14 @@ tar xf libiconv-$LIBICONV_VERSION.tar.gz
 
 rm binutils-*.gz gcc-*.gz gmp-*.bz2 mpc-*.gz mpfr-*.gz libiconv-*.gz
 
-mkdir build-gcc build-binutils
+rm -fr build-binutils build-gcc
+mkdir build-binutils build-gcc
 mv gmp-$GMP_VERSION gcc-$GCC_VERSION/gmp
 mv mpc-$MPC_VERSION gcc-$GCC_VERSION/mpc
 mv mpfr-$MPFR_VERSION gcc-$GCC_VERSION/mpfr
 mv libiconv-$LIBICONV_VERSION gcc-$GCC_VERSION/libiconv
+
+patch -s -p0 < gcc-$GCC_VERSION.patch
 
 echo -n "Where do you want to have your toolchain installed? [$(pwd)] "
 read PREFIX
