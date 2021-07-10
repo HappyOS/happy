@@ -1,8 +1,10 @@
 CMakeFiles/
 cmake_install.cmake
 CMakeCache.txt
-kernel.map
-kernel
+kernel/kernel.map
+kernel/kernel
 Makefile
 disk.img
 .vscode/
+build/
+.idea/

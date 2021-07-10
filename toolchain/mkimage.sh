@@ -12,6 +12,7 @@ if [ "$(id -u)" != 0 ]; then
 fi
 
 dd if=/dev/zero of=$2 bs=1M count=$(($1 * 1024))
+chown $SUDO_UID:$SUDO_GID $2
 
 loop=$(losetup --find --partscan --show $2)
 

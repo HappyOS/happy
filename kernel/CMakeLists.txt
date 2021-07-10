@@ -1,7 +1,7 @@
 add_executable(kernel src/main.cpp src/boot.asm)
 
 target_link_options(kernel PRIVATE
-    -Tsrc/linker.ld
+    -T${CMAKE_CURRENT_SOURCE_DIR}/src/linker.ld
     -nostdlib
     -z max-page-size=4096
     LINKER:--print-memory-usage
