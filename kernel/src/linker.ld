@@ -26,7 +26,6 @@ SECTIONS {
 
     .bss : AT(ADDR(.bss) - OFFSET) {
         *(.bss)
-        *(COMMON)
         . = ALIGN(4096);
     }
 
@@ -35,5 +34,6 @@ SECTIONS {
     /DISCARD/ : {
         *(.comment)
         *(.eh_frame)
+        *(.COMMON)
     }
 }
