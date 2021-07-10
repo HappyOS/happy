@@ -7,7 +7,12 @@ LINK_FLAGS := \
 	-Wl,--print-memory-usage \
 	-Wl,-Map,kernel.map
 
+LIBS := -L../libc -lc -lgcc
+
+INCLUDES := -I../libc/include
+
 CXX_FLAGS := \
+	$(INCLUDES) \
 	-Wall \
 	-Wextra \
 	-Werror \

@@ -26,6 +26,10 @@ start:
     ; Clear direction flag (as expected by the ABI)
     cld
 
+    ; Save the multiboot information pointer
+    mov ecx, LOWER(multiboot_info)
+    mov [ecx], ebx
+
     ; Set up a page directory using 2MiB pages
     ; Add more pages until we have fully mapped the kernel image
 
@@ -115,6 +119,10 @@ higher:
     ; Flush the paging translations for low memory
     invlpg [0]
 
+    mov rcx, multiboot_info
+    mov rdi, [rcx]
+    add rdi, 0xffffffff80000000
+
     ; Stack should be 16-byte aligned at this point
     call entry
 
@@ -178,3 +186,5 @@ section .bss
 align 16
 resb 16 * 1024
 stack:
+
+multiboot_info: dd 0

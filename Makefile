@@ -3,6 +3,7 @@ export CROSS_CC=$(TARGET)-gcc
 export CROSS_CXX=$(TARGET)-g++
 
 all:
+	$(MAKE) -C libc
 	$(MAKE) -C kernel
 
 disk.img:
@@ -24,4 +25,5 @@ qemu: install-kernel
         -drive media=disk,file=disk.img,format=raw,index=0 \
 
 clean:
+	$(MAKE) -C libc clean
 	$(MAKE) -C kernel clean
