@@ -15,8 +15,7 @@ CXX_FLAGS := \
 	-fno-exceptions \
 	-fno-rtti \
 	-mno-red-zone \
-	-mcmodel=kernel \
-	-fno-pic
+	-mcmodel=kernel
 
 SOURCES := $(shell find . -name "*.cpp" -o -name "*.asm")
 OBJECTS := $(SOURCES:.cpp=.o)
@@ -25,10 +24,10 @@ OBJECTS := $(OBJECTS:.asm=.o)
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CXX) $(LINK_FLAGS) $(OBJECTS) $(LIBS) -o $@
+	$(CROSS_CXX) $(LINK_FLAGS) $(OBJECTS) $(LIBS) -o $@
 
 %.o: %.cpp
-	$(CXX) $(CXX_FLAGS) -c $< -o $@
+	$(CROSS_CXX) $(CXX_FLAGS) -c $< -o $@
 
 %.o: %.asm
 	nasm -felf64 $< -o $@

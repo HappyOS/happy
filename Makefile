@@ -10,7 +10,7 @@ disk.img:
 
 build-image: disk.img
 
-install-kernel: build-image
+install-kernel: all build-image
 	toolchain/install.sh disk.img
 
 bochs: install-kernel
