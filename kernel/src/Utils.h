@@ -1,4 +1,3 @@
 #pragma once
 
-void puts(const char *s);
-void puthex(unsigned long n);
+void printk(const char *format, ...) __attribute__ ((format (printf, 1, 2)));;
